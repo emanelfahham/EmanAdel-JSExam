@@ -4,7 +4,9 @@ const baseUrl = 'https://api.themoviedb.org/3/movie/';
 let movieData = [];
 let searchedMoviesLocally = [];
 let dataType = 'now_playing';
-
+const nameRegx = /^[a-z]{3,}$/gi;
+const phoneRegex = /^(01)(0|1|2|5)[0-9]{8}$/;
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 // Selectors:
 let listItemsAnchor = Array.from(document.querySelectorAll('li a[data-target]'));
 const searchfromDBInput = document.querySelector('#searchfromDB');
@@ -48,15 +50,29 @@ $(document).ready(function () {
     // on document load => sidebr is closed
     const sideBarWidth = $('#sideBar').innerWidth();
     $('#sideBar').css('left', -sideBarWidth);
+    $('li').animate({opacity:0, paddingTop:"700px"}, 0);
+
     // function to toggle sidebar:
     $('#toggleSideBar').click(function () { 
         $(this).toggleClass('fa-times fa-align-justify');
         if($('#sideBar').css('left') == '0px'){
-            $('#sideBar').animate({left: - sideBarWidth},500, function(){
-            });
+            $('#sideBar').animate({left: - sideBarWidth},500);
+            $('li').animate({opacity:0, paddingTop:"700px"}, 0);
         } else {
-            $('#sideBar').animate({left: 0},500,function(){
-            });
+             $('#sideBar').animate({left: 0},500, function(){
+                $('li').eq(0).animate({opacity:1, paddingTop:"10px"}, 500, function(){
+                    $('li').eq(1).animate({opacity:1, paddingTop:"10px"},500,function(){
+                        $('li').eq(2).animate({opacity:1, paddingTop:"10px"},500,function(){
+                            $('li').eq(3).animate({opacity:1, paddingTop:"10px"},500,function(){
+                                $('li').eq(4).animate({opacity:1, paddingTop:"10px"},500, function(){
+                                    $('li').eq(5).animate({opacity:1, paddingTop:"10px"},500)
+                                })
+                            })
+                        })
+                    })
+                })
+             });
+
         }  
     });
 });
@@ -83,8 +99,8 @@ async function searchMovies(e){
     movieData = data.results;
     displayResults(movieData)
 }
-
-function searchLocally(e){
+// function to search locally
+function searchLocally(){
     const searchTerm = this.value;
     for (movie of movieData){
         if ((movie.original_title).includes(searchTerm)){
@@ -100,3 +116,7 @@ SearchfromLocalDataInput.addEventListener('keyup', searchLocally);
 getMovie();
 
 
+
+
+
+let userName=document.getElementById("name"),userEmail=document.getElementById("email"),userPhone=document.getElementById("phone"),userAge=document.getElementById("age"),userPassword=document.getElementById("password"),userRePassword=document.getElementById("rePassword"),userNameAlert=document.getElementById("namealert"),userEmailAlert=document.getElementById("emailalert"),userPhoneAlert=document.getElementById("phonealert"),userAgeAlert=document.getElementById("agealert"),userpasswordAlert=document.getElementById("passwordalert"),userRepasswordAlert=document.getElementById("repasswordalert");function userNameValid(){return 1==/^[a-zA-Z0-9]+$/.test(userName.value)?(userNameAlert.style.display="none",!0):(userNameAlert.style.display="block",!1)}function userEmailValid(){return 1==/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(userEmail.value)?(userEmailAlert.style.display="none",!0):(userEmailAlert.style.display="block",!1)}function userPhoneValid(){return 1==/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(userPhone.value)?(userPhoneAlert.style.display="none",!0):(userPhoneAlert.style.display="block",!1)}function userAgeValid(){return 1==/^[1-9][0-9]?$|^100$/.test(userAge.value)?(userAgeAlert.style.display="none",!0):(userAgeAlert.style.display="block",console.log("dkldkdlkdlk"),!1)}function userPasswordValid(){return 1==/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(userPassword.value)?(userpasswordAlert.style.display="none",!0):(userpasswordAlert.style.display="block",!1)}function userRePasswordValid(){return userPassword.value==userRePassword.value?(userRepasswordAlert.style.display="none",!0):(userRepasswordAlert.style.display="block",!1)}userAgeAlert.style.display="none",userName.addEventListener("keyup",userNameValid),userEmail.addEventListener("keyup",userEmailValid),userPhone.addEventListener("keyup",userPhoneValid),userAge.addEventListener("keyup",userAgeValid),userPassword.addEventListener("keyup",userPasswordValid),userRePassword.addEventListener("keyup",userRePasswordValid),document.getElementById("contact").addEventListener("click",function(){userNameValid()&&userEmailValid()&&userPhoneValid()&&userAgeValid()&&userPasswordValid()&&userRePasswordValid()?document.getElementById("submitBtn").disabled=!1:document.getElementById("submitBtn").disabled=!0});
