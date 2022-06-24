@@ -28,44 +28,50 @@
                 
             </div>
         </section>
-        <section class="contactUsSection container p-4">
+        <section class="contactUsSection py-5 container p-4">
             <p class="text-white fs-3">
                 Contact Us...
             </p>
             <div class="row">
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="text" class="form-control bg-transparent" placeholder="Enter Your Name">
+                        <input type="text" id="username" class="form-control bg-transparent" placeholder="Enter Your Name">
+                        <div class="w-100 text-center usernameErrorDiv p-2 errorDiv">Your Name is not valid</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="email" class="form-control bg-transparent" placeholder="Enter your Email">
+                        <input type="email" id="email"  class="form-control bg-transparent" placeholder="Enter your Email">
+                        <div class="w-100 text-center emailErrorDiv p-2 errorDiv">Your Email is not valid</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="text" class="form-control bg-transparent" placeholder="Enter Phone">
+                        <input type="" id="phone"  class="form-control bg-transparent" placeholder="Enter Phone">
+                        <div class="w-100 text-center phoneErrorDiv p-2 errorDiv">Your Phone Number is not valid</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="text" class="form-control bg-transparent" placeholder="Enter Age">
+                        <input type="text" id="age"  class="form-control bg-transparent" placeholder="Enter Age">
+                        <div class="w-100 text-center AgeErrorDiv p-2 errorDiv">Your Age is not valid</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="password" class="form-control bg-transparent" placeholder="Enter Password">
+                        <input type="password" id="password" class="form-control bg-transparent" placeholder="Enter Password">
+                        <div class="w-100 text-center passErrorDiv p-2 errorDiv">Password must be 8 characters with one letter and one number</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="inputDiv mb-3">
-                        <input type="password" class="form-control bg-transparent" placeholder="Confirm Password">
+                        <input type="password" id="confirmPassword" class="form-control bg-transparent" placeholder="Confirm Password">
+                        <div class="w-100 text-center confirmPassErrorDiv p-2 errorDiv">Your Passwords do not match</div>
                     </div>
                 </div>
                 
             </div>
-            <button class="btn btn-outline-danger">Submit</button>
+            <button class="btn btn-outline-danger disabled">Submit</button>
 
         </section>
         <div id="sideBar" class="sideBar position-fixed">
