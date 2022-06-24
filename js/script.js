@@ -55,8 +55,13 @@ $(document).ready(function () {
 
 for( let i = 0; i < listItemsAnchor.length; i++){
     listItemsAnchor[i].addEventListener('click', function(e){
+        $('body, html').animate({scrollTop: 0 },500)
         dataType = this.dataset.target;
         getMovie();
 })
 }
 getMovie();
+$('li a').eq(5).click(function (e) { 
+    let elementOffset = $('.contactUsSection').offset().top;
+    $('body, html').animate({scrollTop: elementOffset },100)
+});
