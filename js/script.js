@@ -5,6 +5,7 @@ let movieData = [];
 let dataType = 'now_playing';
 
 // Selectors:
+let listItemsAnchor = Array.from(document.querySelectorAll('li a[data-target]'));
 
 async function getMovie(){
     const result = await fetch(`${baseUrl}${dataType}?api_key=${apiKey}&language=en-US&page=1`)
@@ -47,4 +48,10 @@ $(document).ready(function () {
     });
 });
 
+for( let i = 0; i < listItemsAnchor.length; i++){
+    listItemsAnchor[i].addEventListener('click', function(e){
+        dataType = this.dataset.target;
+        getMovie();
+})
+}
 getMovie();
