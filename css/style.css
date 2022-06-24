@@ -44,17 +44,16 @@ a:hover{
 }
 .sideBar{
     top: 0;
+    /* left: ; */
     height: 100%;
     width: 200px;
     background-color: #0D0D0D;
 }
 .toggleMenu{
     background-color: #F8F6F6;
-    /* width: 50px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* cursor: pointer; */
 }
 .bottomSocialShare{
     display: flex;
