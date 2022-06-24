@@ -2,11 +2,13 @@ const apiKey = '6d1b5667232d91ab2a0410c07391e5e1';
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
 
 let movieData = [];
+let searchedMoviesLocally = [];
 let dataType = 'now_playing';
 
 // Selectors:
 let listItemsAnchor = Array.from(document.querySelectorAll('li a[data-target]'));
 const searchfromDBInput = document.querySelector('#searchfromDB');
+const SearchfromLocalDataInput = document.querySelector('#SearchfromLocalData');
 
 // get data from api function
 async function getMovie(){
@@ -18,22 +20,22 @@ async function getMovie(){
     }
         const data = await result.json();
         movieData = data.results;
-        displayResults()
+        displayResults(movieData)
 }
 
 // Display Results of search
-function displayResults(){
+function displayResults(moviesArray){
     let html = ``;
-    for (let i = 0 ; i < movieData.length; i++){
+    for (let i = 0 ; i < moviesArray.length; i++){
         html += `<div class="col-lg-4 col-md-6">
                    <div class="p-4">
                      <figure class="position-relative overflow-hidden">
-                        <img src="https://image.tmdb.org/t/p/w500${movieData[i].poster_path}" class="w-100" alt="image">
+                        <img src="https://image.tmdb.org/t/p/w500${moviesArray[i].poster_path}" class="w-100" alt="image">
                         <div class="imgOverlay py-5 px-2">
-                            <p class="movieTitle">${movieData[i].original_title}</p>
-                            <p>${movieData[i].overview}</p>
-                            <p>Rate: ${movieData[i].vote_average}</p>
-                            <p>${movieData[i].release_date}</p>
+                            <p class="movieTitle">${moviesArray[i].original_title}</p>
+                            <p>${moviesArray[i].overview}</p>
+                            <p>Rate: ${moviesArray[i].vote_average}</p>
+                            <p>${moviesArray[i].release_date}</p>
                         </div>
                     </figure>
                    </div>
@@ -79,11 +81,22 @@ async function searchMovies(e){
     let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.value}&page=1&include_adult=false`);
     let data = await result.json();
     movieData = data.results;
-    displayResults()
+    displayResults(movieData)
 }
 
+function searchLocally(e){
+    const searchTerm = this.value;
+    for (movie of movieData){
+        if ((movie.original_title).includes(searchTerm)){
+            searchedMoviesLocally.push(movie);
+            displayResults(searchedMoviesLocally)
+            console.log(searchedMoviesLocally)
+        }
+    }
+}
 
 searchfromDBInput.addEventListener('keyup', searchMovies);
+SearchfromLocalDataInput.addEventListener('keyup', searchLocally);
 getMovie();
 
 
