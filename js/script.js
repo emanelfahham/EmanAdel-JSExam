@@ -8,10 +8,15 @@ let dataType = 'now_playing';
 let listItemsAnchor = Array.from(document.querySelectorAll('li a[data-target]'));
 
 async function getMovie(){
-    const result = await fetch(`${baseUrl}${dataType}?api_key=${apiKey}&language=en-US&page=1`)
-    const data = await result.json();
-    movieData = data.results;
-    displayResults()
+    let result;
+    if(dataType == 'trending'){
+        result = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`)
+    } else {
+        result = await fetch(`${baseUrl}${dataType}?api_key=${apiKey}&language=en-US&page=1`)
+    }
+        const data = await result.json();
+        movieData = data.results;
+        displayResults()
 }
 
 function displayResults(){
