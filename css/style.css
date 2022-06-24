@@ -1,0 +1,66 @@
+:root{
+    --greyColor: rgba(255, 255, 255, 0.6)
+}
+body{
+    background-color: #0D0D0D;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+input.form-control{
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid var(--greyColor);
+    border-radius: 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+input.form-control:focus{
+    color: var(--greyColor);
+}
+figure .imgOverlay{
+    position: absolute;
+    top: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    color: #0D0D0D;
+    transition: all 1s;
+}
+figure .imgOverlay .movieTitle{
+    font-size: 1.5rem;
+}
+figure:hover .imgOverlay{
+    top: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+a:hover{
+    color: #dc3545;
+}
+.sideBar{
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #0D0D0D;
+}
+.toggleMenu{
+    background-color: #F8F6F6;
+    /* width: 50px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* cursor: pointer; */
+}
+.bottomSocialShare{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.sideBar i{
+    cursor: pointer;
+}
