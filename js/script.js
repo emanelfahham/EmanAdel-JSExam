@@ -120,12 +120,12 @@ const phoneRegex = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const ageRegex = /^[1-9][0-9]$/;
 const passRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-const nameInput = document.querySelector('#username');
-const emailInput = document.querySelector('#email');
-const phoneInput = document.querySelector('#phone');
-const ageInput = document.querySelector('#age');
-const passInput = document.querySelector('#password');
-const confirmPassInput = document.querySelector('#confirmPassword');
+const nameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const ageInput = document.getElementById('age');
+const passInput = document.getElementById('password');
+const confirmPassInput = document.getElementById('confirmPassword');
 const usernameErrorDiv = document.querySelector('.usernameErrorDiv');
 const emailErrorDiv = document.querySelector('.emailErrorDiv');
 const phoneErrorDiv = document.querySelector('.phoneErrorDiv');
@@ -181,7 +181,7 @@ function validatePassword(){
 }
 
 function validateConfirmPass(){
-    if (passInput.value == this.value){
+    if (passInput.value == confirmPassInput.value){
         confirmPassErrorDiv.style.display = 'none';
         return true;
     } else {
