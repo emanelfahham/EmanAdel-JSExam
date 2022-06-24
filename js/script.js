@@ -6,7 +6,9 @@ let dataType = 'now_playing';
 
 // Selectors:
 let listItemsAnchor = Array.from(document.querySelectorAll('li a[data-target]'));
+const searchfromDBInput = document.querySelector('#searchfromDB');
 
+// get data from api function
 async function getMovie(){
     let result;
     if(dataType == 'trending'){
@@ -19,6 +21,7 @@ async function getMovie(){
         displayResults()
 }
 
+// Display Results of search
 function displayResults(){
     let html = ``;
     for (let i = 0 ; i < movieData.length; i++){
@@ -40,19 +43,23 @@ function displayResults(){
 }
 
 $(document).ready(function () {
+    // on document load => sidebr is closed
     const sideBarWidth = $('#sideBar').innerWidth();
     $('#sideBar').css('left', -sideBarWidth);
-
+    // function to toggle sidebar:
     $('#toggleSideBar').click(function () { 
         $(this).toggleClass('fa-times fa-align-justify');
         if($('#sideBar').css('left') == '0px'){
-            $('#sideBar').animate({left: - sideBarWidth},500);
+            $('#sideBar').animate({left: - sideBarWidth},500, function(){
+            });
         } else {
-            $('#sideBar').animate({left: 0},500);
+            $('#sideBar').animate({left: 0},500,function(){
+            });
         }  
     });
 });
 
+// loop on list a to get different movie types
 for( let i = 0; i < listItemsAnchor.length; i++){
     listItemsAnchor[i].addEventListener('click', function(e){
         $('body, html').animate({scrollTop: 0 },500)
@@ -60,8 +67,23 @@ for( let i = 0; i < listItemsAnchor.length; i++){
         getMovie();
 })
 }
-getMovie();
+
+// Move to contact us section:
 $('li a').eq(5).click(function (e) { 
     let elementOffset = $('.contactUsSection').offset().top;
-    $('body, html').animate({scrollTop: elementOffset },100)
+    $('body, html').animate({scrollTop: elementOffset },500)
 });
+
+// Search fromDB function
+async function searchMovies(e){
+    let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.value}&page=1&include_adult=false`);
+    let data = await result.json();
+    movieData = data.results;
+    displayResults()
+}
+
+
+searchfromDBInput.addEventListener('keyup', searchMovies);
+getMovie();
+
+

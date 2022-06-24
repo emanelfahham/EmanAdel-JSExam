@@ -33,7 +33,9 @@ figure .imgOverlay .movieTitle{
 figure:hover .imgOverlay{
     top: 0;
 }
-
+li a{
+    /* display: none; */
+}
 a{
     text-decoration: none;
     color: #fff;
