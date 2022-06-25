@@ -18,7 +18,7 @@ input.form-control:focus{
 }
 figure .imgOverlay{
     position: absolute;
-    top: 100%;
+    top: 150%;
     bottom: 0;
     right: 0;
     left: 0;
